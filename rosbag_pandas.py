@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 
 import warnings
@@ -279,15 +280,11 @@ def clean_for_export(df):
     new_df = pd.DataFrame()
     for c, t in df.dtypes.iteritems():
         if t.kind in 'OSUV':
-            s = df[c].dropna().apply(func=str)
-            s = s.str.replace('\n', '')
-            s = s.str.replace('\r', '')
-            s = s.str.replace(',','\t')
-            new_df[c] = s
+            continue  # Drop this kind of column
         else:
             new_df[c] = df[c]
 
-    return new_df 
+    return new_df
 
 
 if __name__ == '__main__':
